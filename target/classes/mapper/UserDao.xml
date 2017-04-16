@@ -1,0 +1,101 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jojoz.gh.dao.UserDao">
+    <!--目的:为dao接口方法提供sql语句配置
+    即针对dao接口中的方法编写我们的sql语句-->
+
+
+    <select id="getUserByLogin" resultType="User">
+        SELECT * FROM
+         t_user WHERE username=#{username}
+         and password=#{password}
+    </select>
+    <insert id="save">
+    		INSERT INTO 
+    		t_user (id,username,password,state,produceDivision,addTime) 
+    		VALUES
+    		(#{id},#{username},#{password},#{state},#{produceDivision},#{addTime})
+    </insert>
+
+	<resultMap type="com.jojoz.gh.dto.UserVO" id="userRsult">  
+        <result property="id"  column="id" />
+        <result property="state"  column="state" />
+        <result property="username"  column="username" />
+        <result property="token"  column="token" />
+        <result property="produceDivision"  column="produceDivision" />
+        <result property="addTime"  column="addTime" />
+         
+    </resultMap> 
+    <select id="getList" resultMap="userRsult">
+        SELECT id,state,username,token,produceDivision,addTime
+        FROM t_user
+        <where>
+    			<if test="words != null and words != ''">
+    			username LIKE CONCAT(CONCAT('%',#{words,jdbcType=VARCHAR}),'%') 
+    			AND 
+    			</if>
+         state IN (1,2) 
+         </where>
+         <if test="sort ==null or sort==''">
+         	ORDER BY addTime DESC
+         </if>
+        <if test="sort !=null and sort !=''">
+        		ORDER BY  ${sort} 
+        </if>
+        <if test="order=='desc'">DESC</if>
+        <if test="order=='asc'">ASC</if>
+        LIMIT #{limit},#{count}
+        
+    </select>
+    <select id="getUserById" resultMap="userRsult">
+        SELECT id,state,username,token,produceDivision
+        FROM t_user
+        WHERE id=#{id}
+    </select>
+    <select id="getCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM t_user
+        <where>
+    			<if test="words != null and words != ''">
+    			username LIKE CONCAT(CONCAT('%',#{words,jdbcType=VARCHAR}),'%')
+    			AND 
+    			</if>
+         state IN (1,2) 
+         </where>
+    </select>
+    
+    <update id="update" >
+    		UPDATE t_user
+    		SET username=#{username},password=#{password},state=#{state}
+    		WHERE id=#{id}
+    </update>
+    <select id="getUserByUsername" resultType="User">
+    SELECT * FROM t_user WHERE username=#{username}
+    </select>
+    <update id="updateToken">
+    UPDATE t_user SET token=#{token} WHERE id=#{id}
+    </update>
+    
+    
+    <update id="updateUser">
+    UPDATE t_user SET
+    <if test="password != null and password != ''">
+     password=#{password} ,
+     </if>
+     username=#{username},
+     addTime=#{addTime},
+     state=#{state},
+     produceDivision=#{produceDivision}
+     WHERE id=#{id}
+    </update>
+    <delete id="delUser">
+    	DELETE FROM t_user WHERE id=#{id} 
+    </delete>
+    
+    
+
+    
+
+
+</mapper>
