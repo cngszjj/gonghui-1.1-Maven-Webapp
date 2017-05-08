@@ -7,7 +7,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jojoz.gh.dto.GHRsult;
 import com.jojoz.gh.dto.UnionRsult;
+import com.jojoz.gh.dto.UnionVO1;
 import com.jojoz.gh.entity.Union;
 import com.jojoz.gh.entity.User;
 import com.jojoz.gh.service.UnionService;
@@ -42,26 +45,7 @@ public class UnionController {
 
 	@Autowired
 	private UserService userService;
-//	@RequestMapping(value = "/fileUploadTest", method = RequestMethod.POST)
-//	public String fileUploadTest(@RequestParam("file") MultipartFile file,
-//			HttpServletRequest request){
-//		
-//		// 判断文件是否为空  
-//        if (!file.isEmpty()) {  
-//            try {  
-//                // 文件保存路径  
-//                String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/"  
-//                        + file.getOriginalFilename();  
-//                // 转存文件  
-//                file.transferTo(new File(filePath));  
-//            } catch (Exception e) {  
-//                e.printStackTrace();  
-//            }  
-//        }  
-//        // 重定向  
-//        return "succ";  
-//		
-//	}
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public GHRsult<Union> savaUnion(HttpServletRequest request,
@@ -90,21 +74,21 @@ public class UnionController {
                     filePath = trueFileName;
                     // 设置存放图片文件的路径
                     path=realPath+/*System.getProperty("file.separator")+*/"/upload/"+trueFileName;
-                    System.out.println("存放图片文件的路径:"+path);
+//                    System.out.println("存放图片文件的路径:"+path);
                     // 转存文件到指定的路径
                     file.transferTo(new File(path));
-                    System.out.println("文件成功上传到指定目录下");
+//                    System.out.println("文件成功上传到指定目录下");
                 }else {
-                    System.out.println("不是我们想要的文件类型,请按要求重新上传");
-                    return null;
+//                    System.out.println("不是我们想要的文件类型,请按要求重新上传");
+                	return new GHRsult<Union>(false, "image error");
                 }
             }else {
-                System.out.println("文件类型为空");
-                return null;
+//                System.out.println("文件类型为空");
+            	return new GHRsult<Union>(false, "image error");
             }
         }else {
             System.out.println("没有找到相对应的文件");
-            return null;
+            return new GHRsult<Union>(false, "image error");
         }
 
 		if (union != null) {
@@ -135,7 +119,7 @@ public class UnionController {
 	@ResponseBody
 	public UnionRsult<Object[]> query(
 			@CookieValue(value = "user", required = false) String userStr,
-			String words, Integer state, Integer page, Integer rows) {
+			String words, Integer state,String pd_words,String dstart,String dend, Integer page, Integer rows) {
 		User user = userService.userValidate(userStr);
 		if (null == user) {
 			return null;
@@ -144,7 +128,7 @@ public class UnionController {
 		if (user.getState() < 2) {
 			return null;
 		}
-		Object[] uvo = unionService.query(words, state, rows, page, user)
+		Object[] uvo = unionService.query(words, state, rows, page, user ,pd_words,dstart,dend)
 				.toArray();
 		return new UnionRsult<Object[]>(uvo.length, uvo);
 
@@ -201,14 +185,32 @@ public class UnionController {
 	}
 	
 	@RequestMapping(value = "/exportUnion", method = RequestMethod.GET)
-	public String exportUnion(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		
-		 String fileName="excel文件";
+	public String exportUnion(HttpServletRequest request,HttpServletResponse response,
+			@CookieValue(value = "user", required = false) String userStr,
+			String words, Integer state,String pd_words,String dstart,
+			String dend, Integer page, Integer rows
+			) throws IOException{
+		User user = userService.userValidate(userStr);
+		if (null == user) {
+			return null;
+		}
+		// 没有权限
+		if (user.getState() < 2) {
+			return null;
+		}
+		 String fileName="union";
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		 fileName = fileName+"("+sdf.format(new Date())+")";
 	        //填充projects数据
-	        List<Union> projects=createData();
+		 	//按条件全部查出
+	        List<UnionVO1> projects=unionService.query(words, state, 100000, 1, user ,pd_words,dstart,dend);
 	        List<Map<String,Object>> list=createExcelRecord(projects);
-	        String columnNames[]={"ID","项目名","销售人","负责人","所用技术","备注"};//列名
-	        String keys[]    =     {"id","name","saler","principal","technology","remarks"};//map中的key
+	        String columnNames[]={"序号","机构名称","住所地址","法定代表人","证件号码",
+	        		"手机号码","第一届委员会成立日期","本届委员会成立日期","发证日期",
+	        		"职工人数","统一社会信用代码","企业性质","所属行业"};//列名
+	        String keys[] = {"num","unionName","registerAddress","legal","legalCredCode",
+	        		"legalPhone","firstSetupTime","thisSetupTime","issueDate",
+	        		"workersCount","unionCardCode","unitNature","unitType"};//map中的key
 	        ByteArrayOutputStream os = new ByteArrayOutputStream();
 	        try {
 	            ExcelUtil.createWorkBook(list,keys,columnNames).write(os);
@@ -245,24 +247,36 @@ public class UnionController {
 
 	}
 	
-	private List<Union> createData() {
-        // TODO Auto-generated method stub
-        //自己实现
-        return unionService.query(null, check, pageSize, pageNum, user);
-    }
-    private List<Map<String, Object>> createExcelRecord(List<Union> projects) {
+//	private List<UnionVO1> createData() {
+//        // TODO Auto-generated method stub
+//        //自己实现
+//        return unionService.getUnionForExport();
+//    }
+    private List<Map<String, Object>> createExcelRecord(List<UnionVO1> unions) {
         List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("sheetName", "sheet1");
         listmap.add(map);
-        Project project=null;
-        for (int j = 0; j < projects.size(); j++) {
-            project=projects.get(j);
+        UnionVO1 project=null;
+//        {"num","unionName","registerAddress","legal","legalCredCode",
+//    		"legalPhone","firstSetupTime","thisSetupTime","issueDate",
+//    		"workersCount","unionCardCode","unitNature","unitType"}
+        for (int j = 0; j < unions.size(); j++) {
+            project=unions.get(j);
             Map<String, Object> mapValue = new HashMap<String, Object>();
-            mapValue.put("id", project.getId());
-            mapValue.put("name", project.getName());
-            mapValue.put("technology", project.getTechnology());
-            mapValue.put("remarks", project.getRemarks());
+            mapValue.put("num", j+1);
+            mapValue.put("unionName", project.getUnionName());
+            mapValue.put("registerAddress", project.getRegisterAddress());
+            mapValue.put("legal", project.getLegal());
+            mapValue.put("legalCredCode", project.getLegalCredCode());
+            mapValue.put("legalPhone", project.getLegalPhone());
+            mapValue.put("firstSetupTime", project.getFirstSetupTime());
+            mapValue.put("thisSetupTime", project.getThisSetupTime());
+            mapValue.put("issueDate", project.getIssueDate());
+            mapValue.put("workersCount", project.getWorkersCount());
+            mapValue.put("unionCardCode", project.getUnionCardCode());
+            mapValue.put("unitNature", project.getUnitNature());
+            mapValue.put("unitType", project.getUnitType());
             listmap.add(mapValue);
         }
         return listmap;

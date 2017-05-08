@@ -7,11 +7,16 @@
 		Cookie newCookie = myCookie[i];
 		if (newCookie.getName().equals("user"))
 		{
-			bool = true;
+			if(!newCookie.getValue().equals("null")){
+				bool = true;
+			}else{
+				bool = false;
+			}
+			
 		}
 	}
 	if(!bool){
-		response.sendRedirect("../login.html");
+		response.sendRedirect("/gonghui/login.html");
 	}
 	
 		

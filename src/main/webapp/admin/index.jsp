@@ -24,11 +24,6 @@
 <link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="easyUI/demo/demo.css">
 <link rel="stylesheet" type="text/css" href="css/style.css">
-<script type="text/javascript" src="easyUI/jquery.min.js"></script>
-<script src="js/common.js"></script>
-<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="easyUI/locale/easyui-cn.js"></script>
 
 <script type="text/javascript">
 	function formatState(val, row) {
@@ -49,42 +44,91 @@
 
 <body>
 	<div class="easyui-tabs" id="main" style="width:100%;height:auto;">
-		<div title="统计" style="padding:10px">
+		<div title="业务办理" style="padding:10px">
 			<table class="easyui-datagrid" id="union_tab"
 				style="width:100%;height:auto;"
 				data-options="rownumbers:true,singleSelect:true,url:'union/list',
-			method:'get',toolbar:'#tb',pagination:true,pageSize:10">
+			method:'get',toolbar:'#tb',pagination:true,pageSize:30,fitColumns:true">
 				<thead>
 					<tr>
-						<th field="unionCardCode" width="120">机构代码证号码</th>
-						<th field="unionName" width="200">机构名称</th>
-						<th field="legal" width="200">法人</th>
-						<th field="produceDivision" width="120">行政区划</th>
-						<th field="state" width="240" formatter="formatUnionState">审核状态</th>
-						<th field="id" width="240" formatter="formatShow"></th>
+						<th field="unionName">机构名称</th>
+						<th field="registerAddress">住所地址</th>
+						<th field="legal">法定代表人</th>
+						<th field="legalCredCode">证件号码</th>
+						<th field="legalPhone">手机号码</th>
+						<th field="firstSetupTime" formatter="formatDateToDay">第一届委员会成立日期</th>
+						<th field="thisSetupTime" formatter="formatDateToDay">本届委员会成立日期</th>
+						<th field="issueDate" formatter="formatDateToDay">发证日期</th>
+						<th field="workersCount">职工人数</th>
+						<th field="unionCardCode">统一社会信用代码</th>
+						<th field="unitNature">企业性质</th>
+						<th field="unitType">所属行业</th>
+						<th field="state" formatter="formatUnionState">审核状态</th>
+						<th field="id" formatter="formatShow" style="width:30px;">操作</th>
+						
+						
 					</tr>
 				</thead>
 			</table>
 			<div id="tb" style="padding:5px;height:auto">
-
 				<div>
-					<input class="easyui-textbox" placeholder="请输入关键字进行搜索" name="words"
-						id="search_words"> <select class="easyui-combobox"
-						id="search_state" panelHeight="auto" name="state"
-						style="width:100px">
+					关键词:<input class="easyui-textbox" placeholder="请输入关键字进行搜索"
+						name="words" id="search_words"> 审核状态:<select
+						class="easyui-combobox" id="search_state" panelHeight="auto"
+						name="state" style="width:100px">
 						<option value="">全部</option>
 						<option value="0">未审核</option>
-						<option value="1">已审核</option>
+						<option value="1">已通过</option>
 						<option value="2">不通过</option>
+					</select> 所属区划:<select id="pd_words" class="easyui-combobox"
+						data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
+						style="width:152px">
+						<option value="">全部</option>
+						<option value="西安市总工会">西安市总工会</option>
+						<option value="新城区总工会">新城区总工会</option>
+						<option value="碑林区总工会">碑林区总工会</option>
+						<option value="莲湖区总工会">莲湖区总工会</option>
+						<option value="雁塔区总工会">雁塔区总工会</option>
+						<option value="灞桥区总工会">灞桥区总工会</option>
+						<option value="未央区总工会">未央区总工会</option>
+						<option value="阎良区总工会">阎良区总工会</option>
+						<option value="临潼区总工会">临潼区总工会</option>
+						<option value="长安区总工会">长安区总工会</option>
+						<option value="蓝田县总工会">蓝田县总工会</option>
+						<option value="周至县总工会">周至县总工会</option>
 
-					</select> <a href="javascript:viod(0)" class="easyui-linkbutton"
-						iconCls="icon-search" onclick="doSearchUnion()">查询</a>
+						<option value="机械冶金建材工会">机械冶金建材工会</option>
+						<option value="建设交通工会">建设交通工会</option>
+						<option value="轻工纺织工会">轻工纺织工会</option>
+						<option value="石化农林工会">石化农林工会</option>
+						<option value="财贸工会">财贸工会</option>
+						<option value="教科文卫工会">教科文卫工会</option>
+						<option value="西电公司工会">西电公司工会</option>
+						<option value="市级机关工会">市级机关工会</option>
+						<option value="西安银行公会">西安银行公会</option>
+
+						<option value="高新技术开发区工会">高新技术开发区工会</option>
+						<option value="曲江新区工会">曲江新区工会</option>
+						<option value="浐灞生态区工会">浐灞生态区工会</option>
+						<option value="航天基地工会">航天基地工会</option>
+						<option value="沣东新城工会">沣东新城工会</option>
+						<option value="国际港务区工会">国际港务区工会</option>
+
+					</select> 办理时间:<input id="dstart" class="easyui-datetimebox"
+						style="width:160px"> 至 <input id="dend"
+						class="easyui-datetimebox" style="width:160px"> <a
+						href="javascript:viod(0)" class="easyui-linkbutton"
+						iconCls="icon-search" onclick="doSearchUnion()">查询</a> <a
+						href="javascript:viod(0)" class="easyui-linkbutton"
+						iconCls="icon-save" onclick="doExport()">导出</a>
 				</div>
 			</div>
 			<div id="win" class="easyui-window" title="详情"
 				style="width:1300px;height:600px"
 				data-options="iconCls:'icon-save',modal:true,closed:true">
+				
 				<div id="unionInfo" style="display:none">
+					
 					<form action="/gonghui/union/sava" id="baseInfo"
 						style="display:none" method="post" class="form-inline">
 						<fieldset>
@@ -96,8 +140,9 @@
 							<input id="unionPhone" name="unionPhone" type="text"
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
 								class="easyui-textbox">
-
+							<img id="photo" src=""/>
 						</fieldset>
+						
 						<fieldset>
 							<label for="registerAddress"><span style="color: red;">*</span>住所地址</label>
 							<input id="registerAddress" type="text" name="registerAddress"
@@ -151,7 +196,9 @@
 							</select> <label for="qvregisterZipcode">办公地址邮政编码</label> <input
 								id="qvregisterZipcode" name="qvregisterZipcode" type="text"
 								class="easyui-textbox">
+							
 						</fieldset>
+						
 						<fieldset>
 							<label for="setupTime" href="#" title="该工会成立日期"
 								class="easyui-tooltip"><span style="color: red; ">*</span>成立日期</label>
@@ -164,6 +211,22 @@
 								id='approvalTime' editable="false" name="approvalTime"
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
 								style="width: ;height:26px">
+						</fieldset>
+						<fieldset>
+							<label for="firstSetupTime" href="#" class="easyui-tooltip"><span
+								style="color: red; ">*</span>根据工会章程，于</label> <input id='firstSetupTime'
+								name="firstSetupTime" class="easyui-datebox" editable="false"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
+								style="width:310px;height:26px"> <label
+								for="firstSetupTime" href="#" class="easyui-tooltip"><span
+								style="color: red; ">*</span>代表）大会选举产生第一届工会委员会</label> <label
+								for="thisSetupTime" href="#" class="easyui-tooltip"><span
+								style="color: red; ">*</span>根据工会章程，于</label> <input id='thisSetupTime'
+								name="thisSetupTime" class="easyui-datebox" editable="false"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
+								style="width:310px;height:26px"> <label
+								for="thisSetupTime" href="#" class="easyui-tooltip"><span
+								style="color: red; ">*</span>（代表）大会选举产生本届工会委员会</label>
 						</fieldset>
 						<fieldset>
 							<label for="workUnit"><span style="color:red">*</span>审批单位</label>
@@ -190,9 +253,12 @@
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
 								type="number" class="easyui-textbox"> <label
 								for="unitNature">所在单位性质</label> <input id="unitNature"
-								name="unitNature" type="text" class="easyui-textbox"> <label
-								for="unitType">所在单位行业属性</label> <input id="unitType"
-								name="unitType" type="text" class="easyui-textbox">
+								name="unitNature" type="text" class="easyui-textbox"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'">
+							<label for="unitType">所在单位所属行业</label> <input id="unitType"
+								name="unitType" type="text" class="easyui-textbox"
+								style="width:453px;"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'">
 
 						</fieldset>
 						<fieldset>
@@ -374,7 +440,7 @@
 			<table class="easyui-datagrid" id="user_data"
 				style="width:100%;height:auto;"
 				data-options="rownumbers:true,singleSelect:true,url:'user/list',
-			method:'get',toolbar:'#tab2',pagination:true,pageSize:20,remoteSort:true">
+			method:'get',toolbar:'#tab2',pagination:true,pageSize:20,remoteSort:true,fitColumns:true">
 				<thead>
 					<tr>
 						<th data-options="field:'username',width:120">用户名</th>
@@ -504,7 +570,14 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="easyUI/jquery.min.js"></script>
+	<script src="js/common.js"></script>
 
+	<script
+		src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="easyUI/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="easyUI/locale/easyui-cn.js"></script>
+	<script src="js/jquery.fileDownload.js"></script>
 	<script type="text/javascript" src="js/admin.js"></script>
 </body>
 </html>

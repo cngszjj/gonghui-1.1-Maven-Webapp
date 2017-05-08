@@ -1,10 +1,12 @@
 package com.jojoz.gh.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.jojoz.gh.dto.UnionVO;
+import com.jojoz.gh.dto.UnionVO1;
 import com.jojoz.gh.entity.Union;
 
 public interface UnionDao {
@@ -39,7 +41,8 @@ public interface UnionDao {
 	
 	public List<UnionVO> getUnionAll();
 	
-	public List<UnionVO> query(@Param("words")String words,@Param("state")Integer state,@Param("count")int count,@Param("index") int index,@Param("produceDivision")String produceDivision);
+	public List<UnionVO1> query(@Param("words")String words,@Param("state")Integer state,@Param("count")int count,@Param("index") int index,@Param("produceDivision")String produceDivision,@Param("dstart") String dstart,@Param("dend") String dend);
 	
+	public List<UnionVO1> getUnionForExport();
 	
 }

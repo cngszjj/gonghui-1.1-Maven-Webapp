@@ -40,6 +40,11 @@
 	</div>
 	<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 	<script>
+	if(typeof JSON == 'undefined'){$('head').append($("<script type='text/javascript' src='js/json2.js'>"));}
+	String.prototype.trim = function() {
+		  return this.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+		}
+	
 		$("#submit").on("click", function () {
 			var username = document.getElementById("username");
 			var password = document.getElementById("password");

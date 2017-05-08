@@ -5,6 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.jojoz.gh.util.CustomDateSerializer;
 
+
 public class Union {
 
 	private String id;
@@ -31,8 +32,8 @@ public class Union {
 	private String unitNature;//所在单位性质
 	private String unitType;//所在单位行业属性
 	
-	private Date firstSetupTime;
-	private Date thisSetupTime;
+	private Date firstSetupTime;//第一届委员会成立日期
+	private Date thisSetupTime;//本届委员会成立日期
 	
 	private String photoUrl;
 	
@@ -71,12 +72,16 @@ public class Union {
 	private Date operationBegin;//本届任起始时间
 	private Date operationTime;//何时加入工会组织
 	
+	private Date issueDate;//发证日期
+	
 	private String operatorName;//经办人姓名
 	private String operatorPost;//职务
 	private String operatorCode;//证件号码
 	private String operatorPhone;//手机号码
 	
 	private Date addTime;
+	
+	private String info;
 	
 	private String user_id;
 
@@ -520,7 +525,7 @@ public class Union {
 	}
 
 	
-
+	@JsonSerialize(using=CustomDateSerializer.class)
 	public Date getFirstSetupTime() {
 		return firstSetupTime;
 	}
@@ -528,7 +533,7 @@ public class Union {
 	public void setFirstSetupTime(Date firstSetupTime) {
 		this.firstSetupTime = firstSetupTime;
 	}
-
+	@JsonSerialize(using=CustomDateSerializer.class)
 	public Date getThisSetupTime() {
 		return thisSetupTime;
 	}
@@ -543,6 +548,22 @@ public class Union {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+	@JsonSerialize(using=CustomDateSerializer.class)
+	public Date getIssueDate() {
+		return issueDate;
+	}
+
+	public void setIssueDate(Date issueDate) {
+		this.issueDate = issueDate;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 	
 	

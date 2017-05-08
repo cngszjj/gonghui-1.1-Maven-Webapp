@@ -16,7 +16,7 @@
     		civilLiability,businessScope,legal,legalSex,legalNation,legalTime,culture,
     		politics,unionPost,concurrentPost,legalOtherPost,legalCredCode,legalPhone,operationBegin,
     		operationTime,operatorName,operatorPost,operatorCode,operatorPhone,addTime,user_id
-    		,thisSetupTime,firstSetupTime,photoUrl
+    		,thisSetupTime,firstSetupTime,photoUrl,issueDate
     		) 
     		VALUES
     		(#{id},#{state},#{unionName},#{unionPhone},#{unionEmail},
@@ -32,7 +32,7 @@
     		#{legalCredCode},#{legalPhone},#{operationBegin},
     		#{operationTime},#{operatorName},#{operatorPost},
     		#{operatorCode},#{operatorPhone},#{addTime},#{user_id}
-    		,#{thisSetupTime},#{firstSetupTime},#{photoUrl}
+    		,#{thisSetupTime},#{firstSetupTime},#{photoUrl},#{issueDate}
     		)
     </insert>
     
@@ -55,7 +55,7 @@
     		civilLiability=#{civilLiability},businessScope=#{businessScope},legal=#{legal},legalSex=#{legalSex},legalNation=#{legalNation},legalTime=#{legalTime},culture=#{culture},
     		politics=#{politics},unionPost=#{unionPost},concurrentPost=#{concurrentPost},legalOtherPost=#{legalOtherPost},legalCredCode=#{legalCredCode},legalPhone=#{legalPhone},operationBegin=#{operationBegin},
     		operationTime=#{operationTime},operatorName=#{operatorName},operatorPost=#{operatorPost},operatorCode=#{operatorCode},operatorPhone=#{operatorPhone},addTime=#{addTime}
-    		,firstSetupTime=#{firstSetupTime},thisSetupTime=#{thisSetupTime}
+    		,firstSetupTime=#{firstSetupTime},thisSetupTime=#{thisSetupTime},issueDate=#{issueDate},info=#{info}
     	WHERE id=#{id}
     </update>
     <resultMap type="com.jojoz.gh.dto.UnionVO" id="unionResult">  
@@ -67,13 +67,40 @@
         <result property="produceDivision"  column="produceDivision" />
         <result property="user_id"  column="user_id" />
          
+    </resultMap>
+    
+     <resultMap type="com.jojoz.gh.dto.UnionVO1" id="unionResultExport">  
+        <result property="id"  column="id" />
+        <result property="state"  column="state" />
+        <result property="unionName"  column="unionName" />
+        <result property="registerAddress"  column="registerAddress" />
+        <result property="legal"  column="legal" />
+        <result property="legalCredCode"  column="legalCredCode" />
+        <result property="legalPhone"  column="legalPhone" />
+        <result property="firstSetupTime"  column="firstSetupTime" />
+        <result property="thisSetupTime"  column="thisSetupTime" />
+        <result property="issueDate"  column="issueDate" />
+        <result property="workersCount"  column="workersCount" />
+        <result property="unionCardCode"  column="unionCardCode" />
+        <result property="unitNature"  column="unitNature" />
+        <result property="unitType"  column="unitType" /> 
     </resultMap> 
+    
+    <select id="getUnionForExport" resultMap="unionResultExport">
+    		SELECT id,state,unionName,registerAddress,legal,legalCredCode,
+    		legalPhone,firstSetupTime,thisSetupTime,issueDate,issueDate,
+    		workersCount,unionCardCode,unitNature,unitType
+    		
+    		 FROM t_union WHERE state = 1
+    </select>
     <select id="getUnionAll" resultMap="unionResult">
     		SELECT id,state,legal,unionName,unionCardCode,produceDivision FROM t_union
     </select>
     
-    <select id="query" resultMap="unionResult">
-    		SELECT id,state,legal,unionName,unionCardCode,produceDivision,user_id 
+    <select id="query" resultMap="unionResultExport">
+    		SELECT id,state,unionName,registerAddress,legal,legalCredCode,
+    		legalPhone,firstSetupTime,thisSetupTime,issueDate,issueDate,
+    		workersCount,unionCardCode,unitNature,unitType  
     		FROM t_union 
     		<where>
     			<if test="words != null and words != ''">
@@ -87,6 +114,13 @@
     			</if>
     			<if test="state != null">
     				AND	state=#{state}
+    			</if>
+
+    			<if test=" dstart!='' and dstart != null ">
+    				AND addTime &gt;= #{dstart,jdbcType=TIMESTAMP}  
+    			</if>
+    			<if test=" dend!='' and dend != null">
+    				  AND addTime &lt;= #{dend,jdbcType=TIMESTAMP} 
     			</if>
     			
     		</where>

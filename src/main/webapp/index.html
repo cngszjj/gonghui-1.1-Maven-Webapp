@@ -85,11 +85,11 @@
          <fieldset>
             <label for="firstSetupTime"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>根据工会章程，于</label>
             <input id='firstSetupTime' name="firstSetupTime" class="easyui-datebox" editable="false" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" style="width:310px;height:26px">
-            <label for="firstSetupTime"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>代表）大会选举产生第一届工会委员会</label>
+            <label for="firstSetupTime1"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>代表）大会选举产生第一届工会委员会</label>
             
             <label for="thisSetupTime"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>根据工会章程，于</label>
             <input id='thisSetupTime' name="thisSetupTime" class="easyui-datebox" editable="false" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" style="width:310px;height:26px">
-            <label for="thisSetupTime"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>（代表）大会选举产生本届工会委员会</label>
+            <label for="thisSetupTime1"  href="#"   class="easyui-tooltip" ><span style="color: red; ">*</span>（代表）大会选举产生本届工会委员会</label>
         </fieldset>
         <fieldset>
         <label for="workUnit"><span style="color:red">*</span>审批单位</label>
@@ -106,9 +106,9 @@
         <label for="unionWorkersCount"><span style="color:red">*</span>专职工会干部数</label>
         <input id="unionWorkersCount" name="unionWorkersCount" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" type="number" class="easyui-textbox" >
         <label for="unitNature">所在单位性质</label>
-        <input id="unitNature" name="unitNature" type="text" class="easyui-textbox" >
-        <label for="unitType">所在单位行业属性</label>
-        <input id="unitType" name="unitType" type="text" class="easyui-textbox" style="width:453px;">
+        <input id="unitNature" name="unitNature" type="text" class="easyui-textbox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'">
+        <label for="unitType">所在单位所属行业</label>
+        <input id="unitType" name="unitType" type="text" class="easyui-textbox" style="width:453px;" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'">
             
         </fieldset>
         <fieldset>
@@ -202,7 +202,9 @@
             <label for="operationBegin" href="#" title="本届任起始时间"  class="easyui-tooltip"><span style="color: red;">*</span>本届任起始时间</label>
             <input type='text' id='operationBegin' editable="false" name="operationBegin" class="easyui-datebox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" style="width: 450px;"/>
             <label for="operationTime" href="#" title="何时加入工会组织"  class="easyui-tooltip"><span style="color: red;">*</span>何时加入工会组织</label>
-            <input type='text' id='operationTime' editable="false"   name="operationTime" class="easyui-datebox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" style="width: 450px;"/>
+            <input type='text' id='operationTime' editable="false"   name="operationTime" class="easyui-datebox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
+        		 <label for="issueDate"><span style="color: red;">*</span>发证日期</label>
+            <input type='text' id='issueDate' editable="false"   name="issueDate" class="easyui-datebox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
         </fieldset>
 
        
@@ -271,7 +273,11 @@
 				btu.hide();
 			}
 			if( 2 == data.state){
-				info.html("审核未通过，请修改后重新提交").attr("style","color:red").show();
+				if(data.info){
+					info.html("审核未通过，请修改后重新提交 原因："+data.info).attr("style","color:red").show();
+				}else{
+					info.html("审核未通过，请修改后重新提交 ").attr("style","color:red").show();
+				}
 				btu.attr("onclick","submitUpdateUnionForm()").show();
 			}
 		}else{
@@ -340,6 +346,9 @@
 						}
 						if(d.error == 'save error'){
 							$.messager.alert('提示','提交错误','info');
+						}
+						if(d.error == 'image error'){
+							$.messager.alert('提示','提交错误','请按照要求上传图片');
 						}
 					}
 				}

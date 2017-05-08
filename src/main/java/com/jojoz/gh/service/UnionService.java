@@ -3,6 +3,7 @@ package com.jojoz.gh.service;
 import java.util.List;
 
 import com.jojoz.gh.dto.UnionVO;
+import com.jojoz.gh.dto.UnionVO1;
 import com.jojoz.gh.entity.Union;
 import com.jojoz.gh.entity.User;
 
@@ -24,7 +25,7 @@ public interface UnionService {
 	 * @param pageNum
 	 * @return
 	 */
-	public List<UnionVO> query(String words,Integer check,Integer pageSize,Integer pageNum,User user);
+	public List<UnionVO1> query(String words,Integer check,Integer pageSize,Integer pageNum,User user);
 	
 	/**
 	 * 获取用户下的union
@@ -42,4 +43,25 @@ public interface UnionService {
 	public Union getUnionById(String id);
 
 	public int updateUnion(Union union);
+	
+	/**
+	 * 导出的union
+	 * @return
+	 */
+	public List<UnionVO1> getUnionForExport();
+
+	/**
+	 * 
+	 * @param words
+	 * @param state
+	 * @param rows
+	 * @param page
+	 * @param user
+	 * @param pd_words
+	 * @param dstart
+	 * @param dend
+	 * @return
+	 */
+	public List<UnionVO1> query(String words, Integer state, Integer rows,
+			Integer page, User user, String pd_words, String dstart, String dend);
 }
