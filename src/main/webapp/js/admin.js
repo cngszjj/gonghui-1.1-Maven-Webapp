@@ -1,4 +1,40 @@
+
+window.onload = function(){
+	var thisuser  = JSON.parse($.cookie("user"));
+//	<option value="西安市总工会">西安市总工会</option>
+//	<option value="新城区总工会">新城区总工会</option>
+//	<option value="碑林区总工会">碑林区总工会</option>
+//	<option value="莲湖区总工会">莲湖区总工会</option>
+//	<option value="雁塔区总工会">雁塔区总工会</option>
+//	<option value="灞桥区总工会">灞桥区总工会</option>
+//	<option value="未央区总工会">未央区总工会</option>
+//	<option value="阎良区总工会">阎良区总工会</option>
+//	<option value="临潼区总工会">临潼区总工会</option>
+//	<option value="长安区总工会">长安区总工会</option>
+//	<option value="蓝田县总工会">蓝田县总工会</option>
+//	<option value="周至县总工会">周至县总工会</option>
+//
+//	<option value="机械冶金建材工会">机械冶金建材工会</option>
+//	<option value="建设交通工会">建设交通工会</option>
+//	<option value="轻工纺织工会">轻工纺织工会</option>
+//	<option value="石化农林工会">石化农林工会</option>
+//	<option value="财贸工会">财贸工会</option>
+//	<option value="教科文卫工会">教科文卫工会</option>
+//	<option value="西电公司工会">西电公司工会</option>
+//	<option value="市级机关工会">市级机关工会</option>
+//	<option value="西安银行公会">西安银行公会</option>
+//
+//	<option value="高新技术开发区工会">高新技术开发区工会</option>
+//	<option value="曲江新区工会">曲江新区工会</option>
+//	<option value="浐灞生态区工会">浐灞生态区工会</option>
+//	<option value="航天基地工会">航天基地工会</option>
+//	<option value="沣东新城工会">沣东新城工会</option>
+//	<option value="国际港务区工会">国际港务区工会</option>
+//	if(thisuser.state != 3){
+//		$("#pd_words").html("<option value=''>西安市总工会</option>")
+//	}
 	
+};
 		function submitForm() {
 			$.messager.progress(); // display the progress bar
 			$('#add_user').form('submit', {
@@ -196,33 +232,7 @@
 			 
 			 
 			
-		}
-		
-//		$("#search_state").combobox({
-//			onSelect:function(){
-//				doSearchUnion();
-//			}
-//		}
-				
-//		)
-		
-
-		function editUser(item) {
-			var id = $(item).attr("id");
-			$('#edit_user_dlg').dialog('open');
-			var d;
-			$.get('user/' + id, function(data) {
-
-				$('#edit_user').form('load', {
-					id : data.id,
-					username : data.username,
-					state : data.state,
-					produceDivision : data.produceDivision,
-					password : data.password
-
-				});
-			});
-		}
+		}		
 		function formatShow(val, row) {
 			return "<a href='javascript:void(0)' id='" + val
 					+ "' onclick='showUnion(this)'>查看</a>";
@@ -236,10 +246,7 @@
 				if(result.success){
 					var data = result.data;
 					$('#baseInfo').form('load', data);
-					$("#photo").attr('src',"upload/"+data.photoUrl);
-//					$("#photo").attr('src',data.photoUrl);
-					
-					
+					$("#photo").attr('src',"upload/"+data.photoUrl);		
 				}else{
 					if(result.error == "not login"){
 						window.location.href="login.html";
@@ -250,6 +257,9 @@
 			});
 			$("#unionInfo").show();
 			$("#baseInfo").show();
+			$("#preserveModelView").show();
+			$("#preserveback").show();
+			$("#preservesave").hide();
 		}
 		
 	function submitUpdateUnionForm(s){
@@ -317,14 +327,55 @@
 		}	
 		}
 	
+	
+	function addUnion(){
+		$("#win").window("open");
+		$('#baseInfo').form('clear');
+		$("#baseInfo").show();
+		$("#unionInfo").show();
+		
+		$("#preserveModelView").hide();
+		$("#preserveback").hide();
+		$("#preservesave").show();
+	}
+	function submitAddUnion(){
+		$.messager.progress();	// display the progress bar
+		$('#baseInfo').form('submit', {
+			url: 'union/save',
+			onSubmit: function(param){
+				var isValid = $(this).form('validate');
+				if (!isValid){
+					$.messager.progress('close');	// hide progress bar while the form is invalid
+				}
+				return isValid;	// return false will stop the form submission
+			},
+			success: function(data){
+				$.messager.progress('close');	// hide progress bar while submit successfully
+				var d = JSON.parse(data);
+				if(d.success){
+					$('#baseInfo').form('clear');
+					$('#win').window('close');
+					$('#union_tab').datagrid('reload');
+					$.messager.alert('提示','操作成功','info');
+				}else{
+					$('#baseInfo').form('clear');
+					$('#win').window('close');
+					$.messager.alert('提示',d.error,'info');
+				}
+				
+				
+			}
+		});
+	}
+	
 	$('#main').tabs({
         tools:[{
-            
             text:' 注销 ',
             handler:function(){
-			$.cookie('user',null);
-			window.location.href="/gonghui/login.html";
+			$.cookie('user',null,{date:new Date,path:'/gonghui'});
+			window.location.reload(true);
 
             }
         }]
     });
+	console.log($.cookie("user"));

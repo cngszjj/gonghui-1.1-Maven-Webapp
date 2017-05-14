@@ -54,6 +54,7 @@ public class UserController {
 			uvo.setState(u.getState());
 			uvo.setToken(u.getToken());
 			uvo.setUsername(u.getUsername());
+			uvo.setProduceDivision(u.getProduceDivision());
 			// resp.sendRedirect("index.html");
 			logger.info("result true ");
 
@@ -112,7 +113,7 @@ public class UserController {
 			return new GHRsult<Integer>(false, "need login");
 		}
 		// 没有权限
-		if (u.getState() != 3) {
+		if (u.getState() <2) {
 			logger.info("no permission");
 			return new GHRsult<Integer>(false, "no permission");
 		}
@@ -166,7 +167,7 @@ public class UserController {
 			return null;
 		}
 		// 没有权限
-		if (user.getState() != 3) {
+		if (user.getState() <2) {
 			logger.info("no permission");
 			return null;
 		}
@@ -191,7 +192,7 @@ public class UserController {
 			return null;
 		}
 		// 没有权限
-		if (user.getState() != 3) {
+		if (user.getState() <2) {
 			logger.info("no permission");
 			return null;
 		}
@@ -211,7 +212,7 @@ public class UserController {
 			return new GHRsult<Integer>(false, "need login");
 		}
 		// 没有权限
-		if (u.getState() != 3) {
+		if (u.getState() <2) {
 			logger.info("no permission");
 			return new GHRsult<Integer>(false, "no permission");
 		}
@@ -246,7 +247,7 @@ public class UserController {
 			return new GHRsult<Integer>(false, "need login");
 		}
 		// 没有权限
-		if (u.getState() != 3) {
+		if (u.getState() <2) {
 			return new GHRsult<Integer>(false, "no permission");
 		}
 		try {

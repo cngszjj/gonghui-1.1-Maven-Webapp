@@ -92,14 +92,21 @@ public class UnionController {
         }
 
 		if (union != null) {
-			union.setUser_id(user.getId());
-			union.setPhotoUrl(filePath);
-			Union u = unionService.getUnionByUser(user);
+
 			int result = 0;
-			if (u != null) {
-				return new GHRsult<Union>(false, "union exist");
+			union.setUser_id(user.getId());
+			if(user.getState()>1){
+				result = unionService.savaUnion(union);
+			}else{
+				union.setPhotoUrl(filePath);
+				Union u = unionService.getUnionByUser(user);
+				if (u != null) {
+					return new GHRsult<Union>(false, "union exist");
+				}
+				result = unionService.savaUnion(union);
 			}
-			result = unionService.savaUnion(union);
+			
+			
 			if (1 == result) {
 				return new GHRsult<Union>(true, "1");
 			}

@@ -65,8 +65,8 @@
 						<th field="unitType">所属行业</th>
 						<th field="state" formatter="formatUnionState">审核状态</th>
 						<th field="id" formatter="formatShow" style="width:30px;">操作</th>
-						
-						
+
+
 					</tr>
 				</thead>
 			</table>
@@ -80,7 +80,7 @@
 						<option value="0">未审核</option>
 						<option value="1">已通过</option>
 						<option value="2">不通过</option>
-					</select>  办理时间:<input id="dstart" class="easyui-datetimebox"
+					</select> 办理时间:<input id="dstart" class="easyui-datetimebox"
 						style="width:160px"> 至 <input id="dend"
 						class="easyui-datetimebox" style="width:160px"> <a
 						href="javascript:viod(0)" class="easyui-linkbutton"
@@ -106,7 +106,7 @@
 								class="easyui-textbox">
 
 						</fieldset>
-						<img id="photo" src=""/>
+						<img id="photo" src="" />
 						<fieldset>
 							<label for="registerAddress"><span style="color: red;">*</span>住所地址</label>
 							<input id="registerAddress" type="text" name="registerAddress"
@@ -160,7 +160,7 @@
 							</select> <label for="qvregisterZipcode">办公地址邮政编码</label> <input
 								id="qvregisterZipcode" name="qvregisterZipcode" type="text"
 								class="easyui-textbox">
-							
+
 						</fieldset>
 						<fieldset>
 							<label for="setupTime" href="#" title="该工会成立日期"
@@ -350,6 +350,22 @@
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
 								style="width: ;" />
 						</fieldset>
+						<fieldset>
+							<label for="unitCode" href="#" title="单位行政代码"
+								class="easyui-tooltip"><span style="color: red;">*</span>单位行政代码</label>
+							<input type='text' id='unitCode'  name="unitCode"
+								class="easyui-textbox"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
+							<label for="unionMoneyProved" href="#" title="工会经费证明"
+								class="easyui-tooltip"><span style="color: red;">*</span>工会经费证明</label>
+							<select id='unionMoneyProved' name="unionMoneyProved"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
+								class="easyui-combobox" style="width:152px;">
+								<option value='工会行政收入专用票据'>工会行政收入专用票据</option>
+								<option value='银行电子缴费付款凭证'>银行电子缴费付款凭证</option>
+								<option value='其他'>其他</option>
+							</select>
+						</fieldset>
 
 
 						<fieldset>
@@ -399,7 +415,7 @@
 				</div>
 			</div>
 		</div>
-</div>
+	</div>
 	<script type="text/javascript" src="easyUI/jquery.min.js"></script>
 	<script src="js/common.js"></script>
 

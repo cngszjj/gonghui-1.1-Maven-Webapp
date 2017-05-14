@@ -65,8 +65,8 @@
 						<th field="unitType">所属行业</th>
 						<th field="state" formatter="formatUnionState">审核状态</th>
 						<th field="id" formatter="formatShow" style="width:30px;">操作</th>
-						
-						
+
+
 					</tr>
 				</thead>
 			</table>
@@ -118,7 +118,11 @@
 						style="width:160px"> 至 <input id="dend"
 						class="easyui-datetimebox" style="width:160px"> <a
 						href="javascript:viod(0)" class="easyui-linkbutton"
-						iconCls="icon-search" onclick="doSearchUnion()">查询</a> <a
+						iconCls="icon-search" onclick="doSearchUnion()">查询</a> 
+						<a
+						href="javascript:viod(0)" class="easyui-linkbutton"
+						iconCls="icon-add" onclick="addUnion()">添加</a>
+						<a
 						href="javascript:viod(0)" class="easyui-linkbutton"
 						iconCls="icon-save" onclick="doExport()">导出</a>
 				</div>
@@ -126,11 +130,11 @@
 			<div id="win" class="easyui-window" title="详情"
 				style="width:1300px;height:600px"
 				data-options="iconCls:'icon-save',modal:true,closed:true">
-				
+
 				<div id="unionInfo" style="display:none">
-					
-					<form action="/gonghui/union/sava" id="baseInfo"
-						style="display:none" method="post" class="form-inline">
+
+					<form action="" id="baseInfo"
+						style="display:none" method="post" class="form-inline"  enctype="multipart/form-data">
 						<fieldset>
 							<label for="unionName"><span style="color: red;">*</span>工会名称</label>
 							<input id="unionName" name="unionName" class="easyui-textbox"
@@ -139,10 +143,9 @@
 							<label for="unionPhone"><span style="color: red;">*</span>联系电话</label>
 							<input id="unionPhone" name="unionPhone" type="text"
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
-								class="easyui-textbox">
-							<img id="photo" src=""/>
+								class="easyui-textbox"> <img id="photo" src="" />
 						</fieldset>
-						
+
 						<fieldset>
 							<label for="registerAddress"><span style="color: red;">*</span>住所地址</label>
 							<input id="registerAddress" type="text" name="registerAddress"
@@ -196,9 +199,9 @@
 							</select> <label for="qvregisterZipcode">办公地址邮政编码</label> <input
 								id="qvregisterZipcode" name="qvregisterZipcode" type="text"
 								class="easyui-textbox">
-							
+
 						</fieldset>
-						
+
 						<fieldset>
 							<label for="setupTime" href="#" title="该工会成立日期"
 								class="easyui-tooltip"><span style="color: red; ">*</span>成立日期</label>
@@ -387,6 +390,24 @@
 								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
 								style="width: ;" />
 						</fieldset>
+						<fieldset>
+							<label for="unitCode" href="#" title="单位行政代码"
+								class="easyui-tooltip"><span style="color: red;">*</span>单位行政代码</label>
+							<input type='text' id='unitCode'  name="unitCode"
+								class="easyui-textbox"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
+							<label for="unionMoneyProved" href="#" title="工会经费证明"
+								class="easyui-tooltip"><span style="color: red;">*</span>工会经费证明</label>
+							<select id='unionMoneyProved' name="unionMoneyProved"
+								data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"
+								class="easyui-combobox" style="width:152px;">
+								<option value='工会行政收入专用票据'>工会行政收入专用票据</option>
+								<option value='银行电子缴费付款凭证'>银行电子缴费付款凭证</option>
+								<option value='其他'>其他</option>
+							</select>
+							<label for="legalPhoto"><span style="color: red;">*</span>法人照片(限制：200kb 2寸)</label>
+        		<input class="easyui-filebox" name="legalPhoto" data-options="prompt:'选择照片'"  >
+						</fieldset>
 
 
 						<fieldset>
@@ -416,6 +437,7 @@
 						</fieldset>
 
 						<input type="text" name="id" style="display:none">
+						
 
 
 
@@ -428,9 +450,12 @@
 						<a href="javascript:void(0)" id="preserveModelView"
 							data-options="size:'large',iconCls:'icon-save'"
 							class="easyui-linkbutton" onclick="submitUpdateUnionForm(1)">通过&nbsp;&nbsp;</a>
-						<a href="javascript:void(0)" id="preserveModelView"
+						<a href="javascript:void(0)" id="preserveback"
 							data-options="size:'large',iconCls:'icon-cancel'"
 							class="easyui-linkbutton" onclick="submitUpdateUnionForm(2)">打回&nbsp;&nbsp;</a>
+						<a href="javascript:void(0)" id="preservesave"
+							data-options="size:'large',iconCls:'icon-save'"
+							class="easyui-linkbutton" style="display:none" onclick="submitAddUnion()">保存&nbsp;&nbsp;</a>
 					</div>
 					</footer>
 				</div>
@@ -544,7 +569,7 @@
 							</tr>
 							<tr>
 								<td>行政区划:</td>
-								<td><select class="easyui-combobox" name="produceDivision"
+								<td><select id="produceSelect" class="easyui-combobox" name="produceDivision"
 									style="width:200px;">
 										<option data-value="新城区总工会">新城区总工会</option>
 										<option data-value="碑林区总工会">碑林区总工会</option>

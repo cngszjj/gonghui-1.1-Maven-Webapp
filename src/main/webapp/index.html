@@ -206,6 +206,17 @@
         		 <label for="issueDate"><span style="color: red;">*</span>发证日期</label>
             <input type='text' id='issueDate' editable="false"   name="issueDate" class="easyui-datebox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
         </fieldset>
+        
+          <fieldset>
+            <label for="unitCode" href="#" title="单位行政代码"  class="easyui-tooltip"><span style="color: red;">*</span>单位行政代码</label>
+            <input type='text' id='unitCode'  name="unitCode" class="easyui-textbox" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" />
+            <label for="unionMoneyProved" href="#" title="工会经费证明"  class="easyui-tooltip"><span style="color: red;">*</span>工会经费证明</label>
+            <select  id='unionMoneyProved' name="unionMoneyProved" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'"  class="easyui-combobox" style="width:152px;">
+            	<option value='工会行政收入专用票据'>工会行政收入专用票据</option>
+            <option value='银行电子缴费付款凭证' >银行电子缴费付款凭证</option>
+            <option value='其他' >其他</option>
+            </select>
+        </fieldset>
 
        
         <fieldset>
@@ -243,6 +254,25 @@
 
 	
 	</div>
+	<div class="union-info">基层工会法人资格及统一社会信用代码赋码登记应提供以下资料：
+
+<ul>
+<li>1,基层工会申请工会法人资格，应当向审查登记机关报送如下材料：</li>
+<li>（1）工会法人资格申请登记表；（一式三份）</li>
+<li>（2）上级工会对基层工会法定代表人的任命批复原件及复印件；</li>
+<li>（3）工会经费和财产情况说明等资料；</li>
+<li>（4）法人身份证及复印件、办理人员身份证及复印件。</li>
+</ul>
+<ul>
+    <li>2、基层工会换届，变更名称、地址、法定代表人的，需提交以下材料：</li>
+	<li>（1）工会法人资格申请登记表；（一式三份）</li>
+	<li>（2）工会组织提出变更事项的请示；</li>
+	<li>（3）上级工会组织同意工会变更事项的批复原件及复印件；</li>
+	<li>（4）工会经费和财产情况说明等资料</li>
+	<li> （5）原工会法人资格证书和组织机构代码证书；</li>
+	<li>（6）法人身份证及复印件、办理人员身份证及复印件。</li>
+ </ul>
+遗失原工会法人资格证书及其副本或原组织机构代码证书的工会组织，应凭上级工会组织开具的遗失证明，在登记管理机关申请重新登记或变更。</div>
     <footer>
     <div>
          <a href="javascript:void(0)" id="preserveModelView" data-options="size:'large',iconCls:'icon-save'" class="easyui-linkbutton" onclick="submitForm()" >提交&nbsp;&nbsp;</a>

@@ -3,18 +3,21 @@
 <%
 	Cookie myCookie[] = request.getCookies();
 	boolean bool = false;
-	for (int i = 0;i<myCookie.length;i++){
-		Cookie newCookie = myCookie[i];
-		if (newCookie.getName().equals("user"))
-		{
-			if(!newCookie.getValue().equals("null")){
-				bool = true;
-			}else{
-				bool = false;
+	if(null!=myCookie){
+		for (int i = 0;i<myCookie.length;i++){
+			Cookie newCookie = myCookie[i];
+			if (newCookie.getName().equals("user"))
+			{
+				if(!newCookie.getValue().equals("null")){
+					bool = true;
+				}else{
+					bool = false;
+				}
+				
 			}
-			
 		}
 	}
+	
 	if(!bool){
 		response.sendRedirect("/gonghui/login.html");
 	}

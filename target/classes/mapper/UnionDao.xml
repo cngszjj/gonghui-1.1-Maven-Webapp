@@ -16,7 +16,7 @@
     		civilLiability,businessScope,legal,legalSex,legalNation,legalTime,culture,
     		politics,unionPost,concurrentPost,legalOtherPost,legalCredCode,legalPhone,operationBegin,
     		operationTime,operatorName,operatorPost,operatorCode,operatorPhone,addTime,user_id
-    		,thisSetupTime,firstSetupTime,photoUrl,issueDate
+    		,thisSetupTime,firstSetupTime,photoUrl,issueDate,unitCode,unionMoneyProved
     		) 
     		VALUES
     		(#{id},#{state},#{unionName},#{unionPhone},#{unionEmail},
@@ -32,7 +32,7 @@
     		#{legalCredCode},#{legalPhone},#{operationBegin},
     		#{operationTime},#{operatorName},#{operatorPost},
     		#{operatorCode},#{operatorPhone},#{addTime},#{user_id}
-    		,#{thisSetupTime},#{firstSetupTime},#{photoUrl},#{issueDate}
+    		,#{thisSetupTime},#{firstSetupTime},#{photoUrl},#{issueDate},#{unitCode},#{unionMoneyProved}
     		)
     </insert>
     
@@ -55,7 +55,7 @@
     		civilLiability=#{civilLiability},businessScope=#{businessScope},legal=#{legal},legalSex=#{legalSex},legalNation=#{legalNation},legalTime=#{legalTime},culture=#{culture},
     		politics=#{politics},unionPost=#{unionPost},concurrentPost=#{concurrentPost},legalOtherPost=#{legalOtherPost},legalCredCode=#{legalCredCode},legalPhone=#{legalPhone},operationBegin=#{operationBegin},
     		operationTime=#{operationTime},operatorName=#{operatorName},operatorPost=#{operatorPost},operatorCode=#{operatorCode},operatorPhone=#{operatorPhone},addTime=#{addTime}
-    		,firstSetupTime=#{firstSetupTime},thisSetupTime=#{thisSetupTime},issueDate=#{issueDate},info=#{info}
+    		,firstSetupTime=#{firstSetupTime},thisSetupTime=#{thisSetupTime},issueDate=#{issueDate},info=#{info},unitCode=#{unitCode},unionMoneyProved=#{unionMoneyProved}
     	WHERE id=#{id}
     </update>
     <resultMap type="com.jojoz.gh.dto.UnionVO" id="unionResult">  

@@ -84,6 +84,9 @@ public class Union {
 	private String info;
 	
 	private String user_id;
+	
+	private String unitCode;//单位行政代码
+	private String unionMoneyProved;//工会经费证明
 
 	public String getId() {
 		return id;
@@ -564,6 +567,22 @@ public class Union {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public String getUnitCode() {
+		return unitCode;
+	}
+
+	public void setUnitCode(String unitCode) {
+		this.unitCode = unitCode;
+	}
+
+	public String getUnionMoneyProved() {
+		return unionMoneyProved;
+	}
+
+	public void setUnionMoneyProved(String unionMoneyProved) {
+		this.unionMoneyProved = unionMoneyProved;
 	}
 	
 	

@@ -61,12 +61,16 @@
 						   if(1 == message.data.state){
 							   window.location.href="index.html";
 						   }
-						   if(3 == message.data.state){
+						   /* if(3 == message.data.state){
 							   window.location.href = "admin/index.jsp";
 						   }
 						   if(2 == message.data.state){
-							   window.location.href = "operate/index.jsp";
+							   window.location.href = "admin/index.jsp";
+						   } */
+						   else{
+							   window.location.href = "admin/index.jsp";
 						   }
+						   
 						   
 					   }else{
 						   $("#info-tips").html("用户名或密码错误！").attr("style","color:red");;
