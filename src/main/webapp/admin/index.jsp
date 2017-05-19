@@ -13,6 +13,8 @@
 <base href="<%=basePath%>">
 
 <title>操作管理</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -406,7 +408,7 @@
 								<option value='其他'>其他</option>
 							</select>
 							<label for="legalPhoto"><span style="color: red;">*</span>法人照片(限制：200kb 2寸)</label>
-        		<input class="easyui-filebox" name="legalPhoto" data-options="prompt:'选择照片'"  >
+        		<input class="easyui-filebox" name="legalPhoto" data-options="prompt:'选择照片'" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" >
 						</fieldset>
 
 

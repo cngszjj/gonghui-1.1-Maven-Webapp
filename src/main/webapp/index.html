@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="renderer" content="webkit">
 	<title>index</title>
 	<link rel="stylesheet" type="text/css" href="easyUI/themes/default/easyui.css">
 	<link rel="stylesheet" type="text/css" href="easyUI/themes/icon.css">
@@ -195,7 +197,7 @@
             <label for="legalPhone"><span style="color: red;">*</span>手机号码</label>
             <input id="legalPhone" name="legalPhone" type="text" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" class="easyui-textbox">
         		<label for="legalPhoto"><span style="color: red;">*</span>法人照片(限制：200kb 2寸)</label>
-        		<input class="easyui-filebox" name="legalPhoto" data-options="prompt:'选择照片'"  >
+        		<input class="easyui-filebox" name="legalPhoto" data-options="prompt:'选择照片'" data-options="required:true,missingMessage:'该输入项为必输项',validType:'NotEmpty'" >
         		
         </fieldset>
         <fieldset>
