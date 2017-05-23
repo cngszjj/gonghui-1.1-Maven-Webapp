@@ -234,8 +234,11 @@ window.onload = function(){
 			
 		}		
 		function formatShow(val, row) {
-			return "<a href='javascript:void(0)' id='" + val
-					+ "' onclick='showUnion(this)'>查看</a>";
+			var chakan = "<a href='javascript:void(0)' id='" + val
+			+ "' onclick='showUnion(this)'>查看</a>";
+			var daochu = "<span style='margin-left:10px;'><a href='javascript:void(0)' id='" + val
+			+ "' onclick='exportDoc(this)'>导出</a></span>";
+			return chakan + daochu;
 		}
 		
 		function showUnion(that){
@@ -260,6 +263,27 @@ window.onload = function(){
 			$("#preserveModelView").show();
 			$("#preserveback").show();
 			$("#preservesave").hide();
+		}
+		
+		function exportDoc(that){
+			var id = $(that).attr("id");
+			console.log(id);
+			 var form = $("<form>");
+			    form.attr('style', 'display:none');
+			    form.attr('target', '');
+			    form.attr('method', 'get'); //请求方式
+			    form.attr('action', 'union/exportDoc');//请求地址
+
+			    var input1 = $('<input>');//将你请求的数据模仿成一个input表单
+			    input1.attr('type', 'hidden');
+			    input1.attr('name', 'exdataId');//该输入框的name
+			    input1.attr('value',id);//该输入框的值
+			    
+			    $('body').append(form);
+			    form.append(input1);
+			    
+			    form.submit();
+			    form.remove();
 		}
 		
 	function submitUpdateUnionForm(s){

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="gonghui"
+  id="myeclipse.1495544498129"
+  context-root="/gonghui"
+  j2ee-spec="1.7"
+  archive="gonghui.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
