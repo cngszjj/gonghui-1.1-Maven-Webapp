@@ -5,8 +5,10 @@ import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +20,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -34,18 +38,23 @@ import com.jojoz.gh.entity.Union;
 import com.jojoz.gh.entity.User;
 import com.jojoz.gh.service.UnionService;
 import com.jojoz.gh.service.UserService;
+import com.jojoz.gh.util.Common;
 import com.jojoz.gh.util.ExcelUtil;
+import com.jojoz.gh.util.HttpUtil;
+import com.jojoz.gh.web.helper.ExportDocHelper;
+import com.jojoz.gh.web.helper.ExportDocxHelper;
 
 @Controller
 @RequestMapping("/union")
 public class UnionController {
 
+	private Logger logger = LoggerFactory.getLogger(UnionController.class);
 	@Autowired
 	private UnionService unionService;
 
 	@Autowired
 	private UserService userService;
-
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
 	public GHRsult<Union> savaUnion(HttpServletRequest request,
@@ -288,5 +297,59 @@ public class UnionController {
         }
         return listmap;
     }
-
+    
+    @RequestMapping(value = "/exportDoc")
+    public void exportDoc(HttpServletRequest request,HttpServletResponse response){
+    	String dataId = request.getParameter("exdataId");
+    	Union union = unionService.getUnionById(dataId);
+    	Map<String,Object> dataMap = Common.transBean2Map(union);
+    	ExportDocHelper docHelper = new ExportDocHelper();
+    	String filePath = docHelper.exportDoc(dataMap);
+    	String fileSuffix = filePath.substring(filePath.indexOf("table.") + 5, filePath.length());
+    	String fileName = "表格"  +  Common.getNowTime() + fileSuffix;
+    	
+    	try {
+    		// 下载文件
+    		HttpUtil.setHeader(response, fileName, filePath);
+    		InputStream inputStream = new FileInputStream(new File(filePath));
+    		OutputStream os = response.getOutputStream();
+    		byte[] b = new byte[2048];
+    		int length;
+    		while ((length = inputStream.read(b)) > 0) {
+    			os.write(b, 0, length);
+    		}
+    		os.close();
+    		inputStream.close();
+		} catch (Exception e) {
+			logger.error("exportDoc Exception:"+e);
+		}
+    }
+    
+    @RequestMapping(value = "/exportDocx")
+    public void exportDocx(HttpServletRequest request,HttpServletResponse response) throws Exception{
+    	String dataId = request.getParameter("exdataId");
+    	Union union = unionService.getUnionById(dataId);
+    	Map<String,Object> dataMap = Common.transBean2Map(union);
+    	ExportDocxHelper docxHelper = new ExportDocxHelper();
+    	String filePath = docxHelper.exportDocx(dataMap);
+    	String fileSuffix = filePath.substring(filePath.indexOf("table.") + 5, filePath.length());
+    	String fileName = "表格"  +  Common.getNowTime() + fileSuffix;
+    	
+    	try {
+    		// 下载文件
+    		HttpUtil.setHeader(response, fileName, filePath);
+    		InputStream inputStream = new FileInputStream(new File(filePath));
+    		OutputStream os = response.getOutputStream();
+    		byte[] b = new byte[20480];
+    		int length;
+    		while ((length = inputStream.read(b)) > 0) {
+    			os.write(b, 0, length);
+    		}
+    		os.close();
+    		inputStream.close();
+		} catch (Exception e) {
+			logger.error("exportDoc Exception:"+e);
+		}
+    }
+    
 }
