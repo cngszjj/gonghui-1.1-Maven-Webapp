@@ -1,8 +1,13 @@
 
 *.class
 
-*.class
-
 src/main/resources/jdbc.properties
 
-*.class
+target/*
+
+.classpath
+
+
+.project
+
+.settings/*
