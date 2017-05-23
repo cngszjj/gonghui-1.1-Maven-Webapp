@@ -396,12 +396,8 @@
 
 						<input type="text" name="id" style="display:none">
 
-
-
-
-
 					</form>
-
+					
 					<footer>
 					<div>
 						<a href="javascript:void(0)" id="preserveModelView"
