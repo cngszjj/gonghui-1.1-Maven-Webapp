@@ -272,7 +272,7 @@ window.onload = function(){
 			    form.attr('style', 'display:none');
 			    form.attr('target', '');
 			    form.attr('method', 'get'); //请求方式
-			    form.attr('action', 'union/exportDoc');//请求地址
+			    form.attr('action', 'union/exportDocx');//请求地址
 
 			    var input1 = $('<input>');//将你请求的数据模仿成一个input表单
 			    input1.attr('type', 'hidden');

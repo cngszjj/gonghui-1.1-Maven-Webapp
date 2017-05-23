@@ -18,7 +18,7 @@ import com.jojoz.gh.util.WordUtil;
  * 导出2003版Word
  * <另存为xml替换数据>
  * 
- * @author sunke
+ * @author sunkey2017
  * @version 1.0
  * @see
  */
@@ -40,7 +40,7 @@ public class ExportDocHelper {
 		Map<String, Object> testMap = new HashMap<String, Object>();
 		// 构造散数据
 		testMap.put("author", "孙珂");
-		testMap.put("date", "2015-11-20");
+		testMap.put("date", "2017-05-22");
 
 		// 构造列表循环数据存放在ArrayList集合中
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
@@ -57,7 +57,10 @@ public class ExportDocHelper {
 	}
 
 	/**
+	 * need word 03 xml
 	 * 
+	 * @param dataMap
+	 * @return
 	 */
 	public String exportDoc(Map<String, Object> dataMap) {
 		//dataMap = createDatas();
@@ -69,7 +72,7 @@ public class ExportDocHelper {
 			FileOutputStream fos = new FileOutputStream(basePath + "table.doc");
 			out = new OutputStreamWriter(fos, "UTF-8");
 			String templatePath = basePath;
-			handler.write(templatePath, "ghtablenew.ftl", dataMap, out);
+			handler.write(templatePath, "table.ftl", dataMap, out);
 			resultUrl = templatePath  + "table.doc";
 			logger.info("03导出成功！");
 		} catch (Exception e) {
