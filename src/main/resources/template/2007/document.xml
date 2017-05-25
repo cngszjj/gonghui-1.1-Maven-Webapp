@@ -892,7 +892,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${firstSetupTime?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(firstSetupTime?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 						<w:r>
 							<w:rPr>
@@ -961,7 +961,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${thisSetupTime?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(thisSetupTime?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 						<w:r>
 							<w:rPr>
@@ -3399,7 +3399,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${legalTime?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(legalTime?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 					</w:p>
 				</w:tc>
@@ -3787,7 +3787,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${operationBegin?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(operationBegin?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 					</w:p>
 				</w:tc>
@@ -3894,7 +3894,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${operationTime?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(operationTime?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 					</w:p>
 				</w:tc>
@@ -4934,7 +4934,7 @@
 								<w:rFonts w:eastAsia="仿宋_GB2312" />
 								<w:sz w:val="24" />
 							</w:rPr>
-							<w:t>${issueDate?string("yyyy-MM-dd")!}</w:t>
+							<w:t>${(issueDate?string("yyyy-MM-dd"))!}</w:t>
 						</w:r>
 					</w:p>
 				</w:tc>
