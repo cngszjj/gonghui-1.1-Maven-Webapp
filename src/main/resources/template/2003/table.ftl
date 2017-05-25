@@ -526,7 +526,7 @@
 	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr></w:pPr><w:r><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" w:hint="fareast" /><wx:font wx:val="仿宋_GB2312" /><w:sz
 	w:val="24" /></w:rPr><w:t>根据工会章程，于</w:t></w:r><w:r wsp:rsidRPr="009469D7"><w:rPr><w:rFonts
-	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr><w:t>${firstSetupTime?string("yyyy-MM-dd")!}</w:t></w:r><w:r><w:rPr><w:rFonts
+	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr><w:t>${(firstSetupTime?string("yyyy-MM-dd"))!}</w:t></w:r><w:r><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" w:hint="fareast" /><wx:font wx:val="仿宋_GB2312" /><w:sz
 	w:val="24" /></w:rPr><w:t>（代表）大会选举产生第一届工会委员会</w:t></w:r></w:p></w:tc></w:tr><w:tr
 	wsp:rsidR="00474DCD" wsp:rsidTr="006D001C"><w:trPr><w:cantSplit /><w:trHeight
@@ -544,7 +544,7 @@
 	w:val="24" /></w:rPr><w:t>根据工会章程，于</w:t></w:r><w:r><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" w:hint="fareast" /><w:sz w:val="24" /></w:rPr><w:t> </w:t></w:r><w:r
 	wsp:rsidRPr="00D24EE7"><w:rPr><w:rFonts w:fareast="仿宋_GB2312" /><w:sz
-	w:val="24" /></w:rPr><w:t>${thisSetupTime?string("yyyy-MM-dd")!}</w:t></w:r><w:r><w:rPr><w:rFonts
+	w:val="24" /></w:rPr><w:t>${(thisSetupTime?string("yyyy-MM-dd"))!}</w:t></w:r><w:r><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" w:hint="fareast" /><wx:font wx:val="仿宋_GB2312" /><w:sz
 	w:val="24" /></w:rPr><w:t>（代表）大会选举产生本届工会委员会</w:t></w:r></w:p></w:tc></w:tr><w:tr
 	wsp:rsidR="00474DCD" wsp:rsidTr="006D001C"><w:trPr><w:cantSplit /><w:trHeight
@@ -1214,7 +1214,7 @@
 	w:line="400" w:line-rule="exact" /><w:jc w:val="center" /><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr></w:pPr><w:r
 	wsp:rsidRPr="008C76D0"><w:rPr><w:rFonts w:fareast="仿宋_GB2312" /><w:sz
-	w:val="24" /></w:rPr><w:t>${legalTime?string("yyyy-MM-dd")!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
+	w:val="24" /></w:rPr><w:t>${(legalTime?string("yyyy-MM-dd"))!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
 	w:w="1080" w:type="dxa" /><w:gridSpan w:val="2" /><w:vAlign
 	w:val="center" /></w:tcPr><w:p wsp:rsidR="00474DCD"
 	wsp:rsidRDefault="00474DCD" wsp:rsidP="006D001C"><w:pPr><w:spacing
@@ -1321,7 +1321,7 @@
 	w:line="400" w:line-rule="exact" /><w:jc w:val="center" /><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr></w:pPr><w:r
 	wsp:rsidRPr="0062115D"><w:rPr><w:rFonts w:fareast="仿宋_GB2312" /><w:sz
-	w:val="24" /></w:rPr><w:t>${operationBegin?string("yyyy-MM-dd")!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
+	w:val="24" /></w:rPr><w:t>${(operationBegin?string("yyyy-MM-dd"))!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
 	w:w="1834" w:type="dxa" /><w:vmerge /><w:vAlign w:val="center" /></w:tcPr><w:p
 	wsp:rsidR="00474DCD" wsp:rsidRDefault="00474DCD" wsp:rsidP="006D001C"><w:pPr><w:spacing
 	w:line="400" w:line-rule="exact" /><w:jc w:val="center" /><w:rPr><w:rFonts
@@ -1350,7 +1350,7 @@
 	w:line="400" w:line-rule="exact" /><w:jc w:val="center" /><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr></w:pPr><w:r
 	wsp:rsidRPr="00420EC2"><w:rPr><w:rFonts w:fareast="仿宋_GB2312" /><w:sz
-	w:val="24" /></w:rPr><w:t>${operationTime?string("yyyy-MM-dd")!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
+	w:val="24" /></w:rPr><w:t>${(operationTime?string("yyyy-MM-dd"))!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
 	w:w="1080" w:type="dxa" /><w:gridSpan w:val="2" /><w:vmerge
 	w:val="restart" /><w:vAlign w:val="center" /></w:tcPr><w:p
 	wsp:rsidR="00474DCD" wsp:rsidRDefault="00474DCD" wsp:rsidP="006D001C"><w:pPr><w:spacing
@@ -1629,7 +1629,7 @@
 	wsp:rsidRDefault="00474DCD" wsp:rsidP="006D001C"><w:pPr><w:jc w:val="center" /><w:rPr><w:rFonts
 	w:fareast="仿宋_GB2312" /><w:sz w:val="24" /></w:rPr></w:pPr><w:r
 	wsp:rsidRPr="0023355D"><w:rPr><w:rFonts w:fareast="仿宋_GB2312" /><w:sz
-	w:val="24" /></w:rPr><w:t>${issueDate?string("yyyy-MM-dd")!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
+	w:val="24" /></w:rPr><w:t>${(issueDate?string("yyyy-MM-dd"))!}</w:t></w:r></w:p></w:tc><w:tc><w:tcPr><w:tcW
 	w:w="1701" w:type="dxa" /><w:gridSpan w:val="3" /><w:vAlign
 	w:val="center" /></w:tcPr><w:p wsp:rsidR="00474DCD"
 	wsp:rsidRDefault="00474DCD" wsp:rsidP="006D001C"><w:pPr><w:jc w:val="center" /><w:rPr><w:rFonts
