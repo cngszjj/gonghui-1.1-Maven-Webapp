@@ -54,7 +54,7 @@
 				<thead>
 					<tr>
 						<th field="unionName">机构名称</th>
-						<th field="registerAddress">住所地址</th>
+						<!-- <th field="registerAddress">住所地址</th> -->
 						<th field="legal">法定代表人</th>
 						<th field="legalCredCode">证件号码</th>
 						<th field="legalPhone">手机号码</th>

@@ -289,6 +289,9 @@ window.onload = function(){
 	function submitUpdateUnionForm(s){
 		if(s == 2){
 			 $.messager.prompt('Prompt', '请说明打回原因:', function(r){
+				 if(typeof(r)=="undefined"){
+					 return;
+				 }
 					$.messager.progress();	// display the progress bar
 					$('#baseInfo').form('submit', {
 						url: 'union/update',
