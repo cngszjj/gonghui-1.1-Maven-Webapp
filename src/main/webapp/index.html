@@ -349,7 +349,7 @@
 
 	</div>
 	<div id="dialog-gh" class="easyui-dialog" title="提示" style="width:700px;height:500px;"
-    data-options="iconCls:'icon-save',resizable:true,modal:true">
+    data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     <div class="union-info">
 			基层工会法人资格及统一社会信用代码赋码登记应提供以下资料：
 			<ul>
@@ -398,6 +398,7 @@
 					$('#baseInfo input').attr("disabled", "disabled");
 					$('#baseInfo select').attr("disabled", "disabled");
 					btu.hide();
+					$('#dialog-gh').window('close');
 
 				}
 				if (1 == data.state) {
@@ -424,6 +425,8 @@
 				if (result.error == "not login") {
 					window.location.href = "login.html";
 				}
+				
+				
 
 			}
 

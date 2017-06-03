@@ -41,7 +41,7 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<UserVO> getList(@Param("count") int count,
-			@Param("limit") int limit, @Param("state") int state,@Param("words") String words,@Param("sort") String sort,@Param("order") String order);
+			@Param("limit") int limit, @Param("state") int state,@Param("words") String words,@Param("sort") String sort,@Param("order") String order,@Param("produce")String produce);
 
 	/**
 	 * 更新用户

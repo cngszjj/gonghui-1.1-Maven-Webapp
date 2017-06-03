@@ -35,6 +35,7 @@ public class UnionServiceImpl implements UnionService{
 			String id = UUID.randomUUID().toString();
 			union.setId(id);
 			union.setAddTime(new Date());
+			userDao.updateUser(union.getUser_id(), null, null, null, union.getProduceDivision(), new Date());
 			return unionDao.save(union);
 		}
 		return 0;

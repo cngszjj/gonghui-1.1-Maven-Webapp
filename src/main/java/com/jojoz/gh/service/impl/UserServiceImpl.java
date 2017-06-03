@@ -108,9 +108,9 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public List<UserVO> getUserList(String words, int pageSize, int pageNum,String sort,String order) {
+	public List<UserVO> getUserList(String words, int pageSize, int pageNum,String sort,String order,String produce) {
 		// TODO Auto-generated method stub
-		return userDao.getList(pageSize,(pageNum-1)*pageSize, 0, words,sort,order);
+		return userDao.getList(pageSize,(pageNum-1)*pageSize, 0, words,sort,order,produce);
 	}
 
 	@Override

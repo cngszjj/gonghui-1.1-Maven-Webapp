@@ -175,7 +175,13 @@ public class UserController {
 			page = 1;
 			rows = 20;
 		}
-		Object[] uvo = userService.getUserList(words, rows, page, sort, order)
+		String produce = null;
+		produce = user.getProduceDivision();
+		if(user.getState() == 3){
+			produce = null;
+		}
+		
+		Object[] uvo = userService.getUserList(words, rows, page, sort, order,produce)
 				.toArray();
 		int count = userService.getCount(words);
 		return new UnionRsult<Object[]>(count, uvo);

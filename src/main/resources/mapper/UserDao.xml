@@ -35,6 +35,10 @@
     			username LIKE CONCAT(CONCAT('%',#{words,jdbcType=VARCHAR}),'%') 
     			AND 
     			</if>
+    			<if test="produce !=null and produce != ''">
+    			produceDivision LIKE CONCAT(CONCAT('%',#{produce,jdbcType=VARCHAR}),'%')
+    			AND
+    			</if>
          state IN (1,2) 
          </where>
          <if test="sort ==null or sort==''">
@@ -83,10 +87,17 @@
     <if test="password != null and password != ''">
      password=#{password} ,
      </if>
+     <if test="username != null and username != ''">
      username=#{username},
+     </if>
      addTime=#{addTime},
+     <if test="state != null and state != ''">
      state=#{state},
+     </if>
+     <if test="produceDivision != null and produceDivision != ''">
      produceDivision=#{produceDivision}
+     </if>
+     
      WHERE id=#{id}
     </update>
     <delete id="delUser">

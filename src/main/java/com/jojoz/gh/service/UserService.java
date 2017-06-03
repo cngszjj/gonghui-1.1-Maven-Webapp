@@ -50,7 +50,7 @@ public interface UserService {
 	 * @param pageNum
 	 * @return
 	 */
-	public List<UserVO> getUserList(String words,int pageSize,int pageNum,String sort,String order);
+	public List<UserVO> getUserList(String words,int pageSize,int pageNum,String sort,String order,String produce);
 	
 	public int getCount(String words);
 	
