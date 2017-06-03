@@ -236,9 +236,9 @@ window.onload = function(){
 		function formatShow(val, row) {
 			var chakan = "<a href='javascript:void(0)' id='" + val
 			+ "' onclick='showUnion(this)'>查看</a>";
-			var daochu = "<span style='margin-left:10px;'><a href='javascript:void(0)' id='" + val
-			+ "' onclick='exportDoc(this)'>导出</a></span>";
-			return chakan + daochu;
+//			var daochu = "<span style='margin-left:10px;'><a href='javascript:void(0)' id='" + val
+//			+ "' onclick='exportDoc(this)'>导出</a></span>";
+			return chakan;
 		}
 		
 		function showUnion(that){
